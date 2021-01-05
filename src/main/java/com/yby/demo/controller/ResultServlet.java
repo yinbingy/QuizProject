@@ -93,6 +93,7 @@ public class ResultServlet extends HttpServlet{
 		request.setAttribute("numOfQuestions", numOfQuestions);
 		request.setAttribute("correctNum", correctNum);
 		request.setAttribute("qqwcList", qqwcList);
+	
 		request.getRequestDispatcher("result.jsp").forward(request, response);   
 		
 
@@ -110,7 +111,11 @@ public class ResultServlet extends HttpServlet{
 		
 		session.removeAttribute("QuizPage");
 		session.removeAttribute("QuizeQuestionList");
-		session.removeAttribute("");
+		session.removeAttribute("choiceUserMade");
+		session.removeAttribute("questionSize");
+		session.removeAttribute("startTime");
+		session.removeAttribute("endTime");
+		request.getRequestDispatcher("/HomeServlet").forward(request, response);
 		
 		
 	}

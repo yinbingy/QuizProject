@@ -45,6 +45,27 @@ public class HomeServlet extends HttpServlet{
 		
 	}
 	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		List<QuizType> quizTypeList = new ArrayList<>();
+		try {
+			quizTypeList = quizTypeDao.selectAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	
+		
+		request.setAttribute("quizTypeList", quizTypeList);
+		request.getRequestDispatcher("home.jsp").forward(request, response);
+		
+		
+		
+	}
+	
+	
 	
 
 }

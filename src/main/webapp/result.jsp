@@ -20,6 +20,8 @@
 <h1><%= session.getAttribute("sessionName") %> Your score is <%= request.getAttribute("correctNum") %> / <%= request.getAttribute("numOfQuestions") %></h1>
 <h2> <%= request.getAttribute("pass") %> </h2>
 
+<h3> start at <%= session.getAttribute("startTime") %> </h3>
+<h3> end at <%= session.getAttribute("endTime") %></h3>
 
 <c:forEach items="${requestScope.qqwcList}" var="qqwcList" >
 	

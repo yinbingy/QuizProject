@@ -1,7 +1,10 @@
 package com.yby.demo.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,14 +33,14 @@ public class QuizServlet extends HttpServlet{
 	private QuizQuestionDAO qqDao;
 	private QuizChoiceDAO qcDao;
 	
-	private Map<Integer, Integer> choiceUserMade;
+	//private Map<Integer, Integer> choiceUserMade;
 	
 	
 	@Override
 	public void init() {
 		qqDao = new QuizQuestionDAO();
 		qcDao = new QuizChoiceDAO();
-		choiceUserMade = new HashMap<>();
+		//choiceUserMade = new HashMap<>();
 	}
 	
 	
@@ -47,9 +50,57 @@ public class QuizServlet extends HttpServlet{
 		
 		
 		
+		
+		String jump = request.getParameter("jump");
 		String act = request.getParameter("act");
-		if (act == null) {
-		    System.out.println("null");
+		if (jump != null) {
+			
+			
+			HttpSession session = request.getSession(false);
+			if(session == null) {
+				request.setAttribute("loginMsg", "Timeout!");
+
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+			
+			int i = Integer.parseInt(jump) - 1;
+			
+			Map<Integer, Integer> choiceUserMade = (Map<Integer, Integer>) session.getAttribute("choiceUserMade");
+			
+			List<QuizQuestion> qqList = (List<QuizQuestion>)session.getAttribute("QuizeQuestionList");
+			
+			
+//			if(request.getParameter("choiceSelected") != null) {
+//				int choiceId = Integer.parseInt(request.getParameter("choiceSelected"));
+//				choiceUserMade.put(qqList.get(i).getQuiz_question_id(), choiceId);
+//			}
+			
+			QuizQuestion qq = qqList.get(i);
+			
+			
+			
+			List<QuizChoice> qcList = null;
+			
+			try {
+				qcList = qcDao.getAllQuizChoiceByQuestionId(qq.getQuiz_question_id());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("QuizChoiceList", qcList);
+			
+			int nextChoiceId = 0;
+			
+			
+			if (choiceUserMade.containsKey(qq.getQuiz_question_id())) {
+				nextChoiceId = choiceUserMade.get(qq.getQuiz_question_id());
+			}
+			
+			request.setAttribute("nextChoiceId", nextChoiceId);
+			session.setAttribute("quizPage", i);
+			request.getRequestDispatcher("question.jsp").forward(request, response);
+			
+		    
 		} else if (act.equals("next")) {
 			
 			HttpSession session = request.getSession(false);
@@ -60,6 +111,8 @@ public class QuizServlet extends HttpServlet{
 			}
 			
 			int i = (int) session.getAttribute("quizPage");
+			
+			Map<Integer, Integer> choiceUserMade = (Map<Integer, Integer>) session.getAttribute("choiceUserMade");
 			
 			List<QuizQuestion> qqList = (List<QuizQuestion>)session.getAttribute("QuizeQuestionList");
 			
@@ -94,6 +147,7 @@ public class QuizServlet extends HttpServlet{
 			request.getRequestDispatcher("question.jsp").forward(request, response);
 			
 		} else if (act.equals("prev")) {
+			
 			HttpSession session = request.getSession(false);
 			
 			if(session == null) {
@@ -102,6 +156,7 @@ public class QuizServlet extends HttpServlet{
 			}
 			int i = (int) session.getAttribute("quizPage");
 			
+			Map<Integer, Integer> choiceUserMade = (Map<Integer, Integer>) session.getAttribute("choiceUserMade");
 			List<QuizQuestion> qqList = (List<QuizQuestion>)session.getAttribute("QuizeQuestionList");
 
 			
@@ -142,6 +197,7 @@ public class QuizServlet extends HttpServlet{
 			
 			int i = (int) session.getAttribute("quizPage");
 			
+			Map<Integer, Integer> choiceUserMade = (Map<Integer, Integer>) session.getAttribute("choiceUserMade");
 			List<QuizQuestion> qqList = (List<QuizQuestion>)session.getAttribute("QuizeQuestionList");
 			
 			if(request.getParameter("choiceSelected") != null) {
@@ -149,20 +205,79 @@ public class QuizServlet extends HttpServlet{
 				choiceUserMade.put(qqList.get(i).getQuiz_question_id(), choiceId);
 			}
 			
-			if (choiceUserMade.size() < qqList.size()) {
+			
+			
+			if ( choiceUserMade.size() < qqList.size()) {
+				
+				
+				QuizQuestion qq = qqList.get(i);
+				List<QuizChoice> qcList = null;
+				try {
+					qcList = qcDao.getAllQuizChoiceByQuestionId(qq.getQuiz_question_id());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				request.setAttribute("QuizChoiceList", qcList);
+				
+				
+				int nextChoiceId = 0;
+				
+				if (choiceUserMade.containsKey(qq.getQuiz_question_id())) {
+					nextChoiceId = choiceUserMade.get(qq.getQuiz_question_id());
+				}
+				
+				request.setAttribute("nextChoiceId", nextChoiceId);
+				
+				request.setAttribute("notFinish", true);
 				request.getRequestDispatcher("question.jsp").forward(request, response);
 			} else {
 				
 				request.setAttribute("choiceUserMade", choiceUserMade);
+				
+				session.setAttribute("endTime", new Timestamp(System.currentTimeMillis()));
 				request.getRequestDispatcher("/ResultServlet").forward(request, response);
 			}
 			
+		} else if (act.equals("force submit")){
+			
+			HttpSession session = request.getSession(false);
+			if(session == null) {
+				request.setAttribute("loginMsg", "Timeout!");
+
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+			
+			int i = (int) session.getAttribute("quizPage");
+			
+			Map<Integer, Integer> choiceUserMade = (Map<Integer, Integer>) session.getAttribute("choiceUserMade");
+			List<QuizQuestion> qqList = (List<QuizQuestion>)session.getAttribute("QuizeQuestionList");
+			
+			if(request.getParameter("choiceSelected") != null) {
+				int choiceId = Integer.parseInt(request.getParameter("choiceSelected"));
+				choiceUserMade.put(qqList.get(i).getQuiz_question_id(), choiceId);
+			}
+			
+				request.setAttribute("choiceUserMade", choiceUserMade);
+				
+				
+				session.setAttribute("endTime", new Timestamp(System.currentTimeMillis()));
+				request.getRequestDispatcher("/ResultServlet").forward(request, response);
 			
 		}
 		else {
 		    //someone has altered the HTML and sent a different value!
 		}
-		System.out.println(choiceUserMade);
+		
+		
+
+		HttpSession session = request.getSession(false);
+		if(session == null) {
+			request.setAttribute("loginMsg", "Timeout!");
+
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
+		
 	}
 	
 	
@@ -180,6 +295,8 @@ public class QuizServlet extends HttpServlet{
 		List<QuizQuestion> qqList = new ArrayList<>();
 		List<QuizChoice> qcList = new ArrayList<>();
 		
+		Map<Integer, Integer> choiceUserMade = new HashMap<>();
+		
 		try {
 			qqList = qqDao.getAllQuizQuestionByType(Integer.parseInt(s));
 		} catch (NumberFormatException e) {
@@ -195,8 +312,12 @@ public class QuizServlet extends HttpServlet{
 		
 		HttpSession session = request.getSession(false);
 		
+		
+		session.setAttribute("choiceUserMade", choiceUserMade);
 		session.setAttribute("QuizeQuestionList", qqList);
 		session.setAttribute("quizPage", 0);
+		session.setAttribute("questionSize", qqList.size());
+		session.setAttribute("startTime", new Timestamp(System.currentTimeMillis()));
 		QuizQuestion qq = qqList.get(0);
 		
 		try {

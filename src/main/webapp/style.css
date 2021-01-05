@@ -1,0 +1,49 @@
+body {
+font-family: Verdana, arial;
+ }
+
+.notation-text {
+color: #000000;
+font-size: 18px;
+text-align: center;
+margin: 18px;
+}
+
+.notation-block-star {
+display: table;
+margin: 0 auto;
+width: inherit;
+}
+
+
+.notation-star {
+background-image: url("../images/etoile_grise.png");
+background-repeat: no-repeat;
+cursor: pointer;
+display: table-cell;
+float: right;
+height: 64px;
+width: 64px;
+padding: 10 5px;
+}
+
+
+.notation-star:hover,
+.notation-star:hover ~ .notation-star {
+background-image: url("../images/etoile_jaune.png");
+}
+
+.notation-star-selected {
+background-image: url("../images/etoile_jaune.png");
+background-repeat: no-repeat;
+cursor: pointer;
+display: table-cell;
+float: right;
+height: 64px;
+width: 64px;
+padding: 0 5px;
+}
+
+.notation-star-selected  ~ .notation-star {
+background-image: url("../images/etoile_jaune.png");
+}

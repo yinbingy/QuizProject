@@ -34,11 +34,16 @@
 	  
 	  
 	  
+	  
+	  
 	  <form action="QuizServlet" method="post">
 	  
+	  			<h2>Jump to</h2>
 	  
-	  
-	  
+	  			<c:forEach var = "temp" begin = "1" end = "${sessionScope.questionSize}">
+	  				<input type="submit" name="jump" value="${temp}"/>
+	  			</c:forEach>
+	  			</br>
 	  
 	  			<c:forEach items = "${requestScope.QuizChoiceList}"  var  = "choice">
 						
@@ -80,6 +85,13 @@
 					</c:otherwise>
 				</c:choose>
 				
+				
+				<c:if test = "${requestScope.notFinish != null}">
+					<c:out value = "You are not finish!"/>
+					<input type="submit" name="act" value="force submit"/>
+				</c:if>
+				
+			
 
 				
 				
