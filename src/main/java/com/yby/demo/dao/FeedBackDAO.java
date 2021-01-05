@@ -22,6 +22,8 @@ public class FeedBackDAO {
 		ps.setString(1, content);
 		ps.setInt(2, star);
 		
+		
+		
 		int i = ps.executeUpdate();
 		
 		if(i == 0) {

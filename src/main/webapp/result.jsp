@@ -16,7 +16,7 @@
 <body>
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<h3> This is your result </h3>
+<h3> This is your result for <%=session.getAttribute("quizType") %> </h3>
 <h1><%= session.getAttribute("sessionName") %> Your score is <%= request.getAttribute("correctNum") %> / <%= request.getAttribute("numOfQuestions") %></h1>
 <h2> <%= request.getAttribute("pass") %> </h2>
 

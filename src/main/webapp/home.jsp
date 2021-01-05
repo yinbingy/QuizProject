@@ -63,7 +63,7 @@
 	    <h5 class="card-title"><c:out value = "${quizTypeList.type_name}"></c:out></h5>
 	    
 	   
-	    <a href="QuizServlet?quizId=${quizTypeList.type_id}" class="btn btn-primary">Start</a>
+	    <a href="QuizServlet?quizId=${quizTypeList.type_id}&quizType=${quizTypeList.type_name}" class="btn btn-primary">Start</a>
 	  </div>
 	  </div>
 	 

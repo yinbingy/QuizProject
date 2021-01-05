@@ -276,6 +276,9 @@ public class QuizServlet extends HttpServlet{
 			request.setAttribute("loginMsg", "Timeout!");
 
 			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else {
+			
+			System.out.println(session.getAttribute("choiceUserMade"));
 		}
 		
 	}
@@ -292,10 +295,17 @@ public class QuizServlet extends HttpServlet{
 		
 		
 		String s = request.getParameter("quizId");
+		
+		if(s == null) {
+			request.getRequestDispatcher("HomeServlet").forward(request, response);
+		}
+		String typeName = request.getParameter("quizType");
 		List<QuizQuestion> qqList = new ArrayList<>();
 		List<QuizChoice> qcList = new ArrayList<>();
 		
 		Map<Integer, Integer> choiceUserMade = new HashMap<>();
+		
+		
 		
 		try {
 			qqList = qqDao.getAllQuizQuestionByType(Integer.parseInt(s));
@@ -310,13 +320,15 @@ public class QuizServlet extends HttpServlet{
 		
 		
 		
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(false);		
 		
-		
+		session.setAttribute("typeId", Integer.parseInt(s));
 		session.setAttribute("choiceUserMade", choiceUserMade);
 		session.setAttribute("QuizeQuestionList", qqList);
 		session.setAttribute("quizPage", 0);
 		session.setAttribute("questionSize", qqList.size());
+		
+		session.setAttribute("quizType", typeName);
 		session.setAttribute("startTime", new Timestamp(System.currentTimeMillis()));
 		QuizQuestion qq = qqList.get(0);
 		

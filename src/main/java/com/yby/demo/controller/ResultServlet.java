@@ -2,6 +2,7 @@ package com.yby.demo.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,18 +16,22 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.cj.Session;
 import com.yby.demo.dao.QuizChoiceDAO;
+import com.yby.demo.dao.ResultDAO;
 import com.yby.demo.domain.QuizChoice;
 import com.yby.demo.domain.QuizQuestion;
 import com.yby.demo.domain.QuizQuestionWithCorrect;
+import com.yby.demo.domain.QuizResult;
 
 @WebServlet("/ResultServlet")
 public class ResultServlet extends HttpServlet{
 	
 	private QuizChoiceDAO quizChoiceDao;
+	private ResultDAO resultDao;
 	
 	@Override
 	public void init() {
 		quizChoiceDao = new QuizChoiceDAO();
+		resultDao = new ResultDAO();
 	}
 //	
 	
@@ -34,6 +39,12 @@ public class ResultServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		
+		
+		
+		
+		
 		
 		Map<Integer, Integer> choiceIdUserMade = (Map<Integer, Integer>) request.getAttribute("choiceUserMade");
 		
@@ -43,6 +54,7 @@ public class ResultServlet extends HttpServlet{
 			request.setAttribute("loginMsg", "Timeout!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
+		
 		
 		qqList = (List<QuizQuestion>) session.getAttribute("QuizeQuestionList");
 		
@@ -90,6 +102,24 @@ public class ResultServlet extends HttpServlet{
 		} else {
 			request.setAttribute("pass", "You failed it!");
 		}
+		
+		
+		QuizResult qr = new QuizResult();
+		qr.setUserId((int) session.getAttribute("UserId"));
+		qr.setTypeId((int) session.getAttribute("typeId"));
+		
+		qr.setScore((int) avg);
+		qr.setStartTime((Timestamp)session.getAttribute("startTime"));
+		qr.setEndTime((Timestamp)session.getAttribute("endTime"));
+		
+		
+		try {
+			resultDao.addResult(qr);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("numOfQuestions", numOfQuestions);
 		request.setAttribute("correctNum", correctNum);
 		request.setAttribute("qqwcList", qqwcList);

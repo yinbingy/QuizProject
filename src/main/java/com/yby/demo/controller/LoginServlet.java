@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
 			
 			HttpSession newSession = request.getSession();
 			newSession.setAttribute("sessionName", username);
+			newSession.setAttribute("UserId", user.getUser_id());
 			
 			// set something
 			newSession.setMaxInactiveInterval(5 * 60);
