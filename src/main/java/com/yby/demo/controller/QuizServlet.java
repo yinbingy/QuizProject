@@ -154,7 +154,7 @@ public class QuizServlet extends HttpServlet{
 			} else {
 				
 				request.setAttribute("choiceUserMade", choiceUserMade);
-				request.getRequestDispatcher("result.jsp").forward(request, response);
+				request.getRequestDispatcher("/ResultServlet").forward(request, response);
 			}
 			
 			
@@ -173,6 +173,9 @@ public class QuizServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		
+		
 		String s = request.getParameter("quizId");
 		List<QuizQuestion> qqList = new ArrayList<>();
 		List<QuizChoice> qcList = new ArrayList<>();
@@ -188,13 +191,9 @@ public class QuizServlet extends HttpServlet{
 		}
 		
 		
-//		qcList = qcDao.getAllQuizChoiceByQuestionId(1);
 		
 		
 		HttpSession session = request.getSession(false);
-		
-		//request.setAttribute("quizChoice", o);
-		
 		
 		session.setAttribute("QuizeQuestionList", qqList);
 		session.setAttribute("quizPage", 0);

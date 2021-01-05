@@ -37,5 +37,47 @@ public class QuizChoiceDAO {
 		return qcList;
 		
 	}
+	
+	public QuizChoice getQuizChoiceByChoiceId(int choiceId) throws SQLException {
+		
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "SELECT * FROM choice as ch WHERE ch.CHOICE_ID = ?";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ps.setInt(1, choiceId);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if (rs.next()) {
+			QuizChoice qc = new QuizChoice();
+			qc.setChoice_id(rs.getInt("CHOICE_ID"));
+			qc.setQuestion_id(rs.getInt("QUESTION_ID"));
+			qc.setContent(rs.getString("CONTENT"));
+			qc.setIf_correct(rs.getBoolean("IF_CORRECT"));
+			return qc;
+		} else {
+			return null;
+		}
+		
+	}
+	
+	public boolean getCorrectByChoiceId(int choiceId) throws SQLException {
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "SELECT * FROM choice as ch WHERE ch.CHOICE_ID = ?";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ps.setInt(1, choiceId);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			return rs.getBoolean("IF_CORRECT");
+		} else {
+			return false;
+		}
+		
+	}
 
 }
