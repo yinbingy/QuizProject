@@ -3,7 +3,7 @@
   <groupId>com.yby.demo</groupId>
   <artifactId>QuizProject</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   
   <dependencies>
 	  <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
@@ -33,7 +33,11 @@
 		    <artifactId>jstl</artifactId>
 		    <version>1.2</version>
 		</dependency>	
-	
+			<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.3.14.Final</version>
+		</dependency>
 	
 
 <!-- https://mvnrepository.com/artifact/javax.sql/jdbc-stdext -->

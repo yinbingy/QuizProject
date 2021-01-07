@@ -28,7 +28,7 @@ public class HomeServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<QuizType> quizTypeList = new ArrayList<>();
+		List<QuizType> quizTypeList = new ArrayList<QuizType>();
 		try {
 			quizTypeList = quizTypeDao.selectAll();
 		} catch (SQLException e) {
@@ -48,7 +48,7 @@ public class HomeServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<QuizType> quizTypeList = new ArrayList<>();
+		List<QuizType> quizTypeList = new ArrayList<QuizType>();
 		try {
 			quizTypeList = quizTypeDao.selectAll();
 		} catch (SQLException e) {

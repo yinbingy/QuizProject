@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.yby.demo.dao.DAOFactory;
 import com.yby.demo.dao.FeedBackDAO;
 
 @WebServlet("/FeedbackServlet")
@@ -18,7 +19,7 @@ public class FeedbackServlet extends HttpServlet{
 	
 	@Override
 	public void init() {
-		feedbackDao = new FeedBackDAO();
+		feedbackDao = DAOFactory.createFeedBackDAO("Hibernate");
 	}
 	
 	@Override
