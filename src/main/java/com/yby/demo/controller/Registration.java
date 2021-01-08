@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.yby.demo.dao.DAOFactory;
 import com.yby.demo.dao.UserDAO;
 
 @WebServlet("/RegistrationServlet")
@@ -18,7 +19,7 @@ public class Registration extends HttpServlet{
 	
 	@Override
 	public void init() {
-		userDao = new UserDAO();
+		userDao = DAOFactory.createUserDAO("Hibernate");
 	}
 	
 	

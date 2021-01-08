@@ -1,10 +1,11 @@
-package com.yby.demo.dao;
+package com.yby.demo.dao.imp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.yby.demo.dao.FeedBackDAO;
 import com.yby.demo.util.JDBCUtil;
 
 public class FeedBackJDBCDAO implements FeedBackDAO{

@@ -1,9 +1,25 @@
 package com.yby.demo.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user")
 public class User {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "USER_ID")
 	private Integer user_id;
+	
+	@Column(name = "USER_NAME")
 	private String user_name;
+	
+	@Column(name = "PWD")
 	private String pwd;
 	
 	

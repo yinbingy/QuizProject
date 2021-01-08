@@ -1,7 +1,22 @@
 package com.yby.demo.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "quiz_type")
 public class QuizType {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "TYPE_ID")
 	private Integer type_id;
+	
+	@Column(name = "TYPE_NAME")
 	private String type_name;
 	
 	public Integer getType_id() {

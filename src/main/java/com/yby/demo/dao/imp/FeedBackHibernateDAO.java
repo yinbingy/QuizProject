@@ -1,10 +1,11 @@
-package com.yby.demo.dao;
+package com.yby.demo.dao.imp;
 
 import java.sql.SQLException;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.yby.demo.dao.FeedBackDAO;
 import com.yby.demo.domain.Feedback;
 import com.yby.demo.util.HibernateConfigUtil;
 

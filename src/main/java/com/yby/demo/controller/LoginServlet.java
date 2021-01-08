@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.yby.demo.dao.DAOFactory;
 import com.yby.demo.dao.UserDAO;
 import com.yby.demo.domain.User;
 
@@ -26,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 	
 	@Override
 	public void init() {
-		userDao = new UserDAO();
+		userDao = DAOFactory.createUserDAO("Hibernate");
 	}
 	
 	@Override

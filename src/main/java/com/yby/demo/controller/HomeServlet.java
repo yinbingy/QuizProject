@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.yby.demo.dao.DAOFactory;
 import com.yby.demo.dao.QuizTypeDAO;
 import com.yby.demo.domain.QuizType;
 
@@ -22,7 +23,7 @@ public class HomeServlet extends HttpServlet{
 	
 	@Override
 	public void init() {
-		quizTypeDao = new QuizTypeDAO();
+		quizTypeDao = DAOFactory.createQuizTypeDAO("Hibernate");
 	}
 	
 	@Override
