@@ -13,6 +13,8 @@
         <mapping class="com.yby.demo.domain.Feedback"/>
         <mapping class="com.yby.demo.domain.User"/>
         <mapping class="com.yby.demo.domain.QuizType"/>
+        <mapping class="com.yby.demo.domain.QuizQuestion"/>
+        <mapping class="com.yby.demo.domain.QuizChoice"/>
         
     </session-factory>
 </hibernate-configuration>

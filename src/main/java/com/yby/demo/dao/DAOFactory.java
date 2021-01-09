@@ -2,6 +2,10 @@ package com.yby.demo.dao;
 
 import com.yby.demo.dao.imp.FeedBackHibernateDAO;
 import com.yby.demo.dao.imp.FeedBackJDBCDAO;
+import com.yby.demo.dao.imp.QuizChoiceHibernateDAO;
+import com.yby.demo.dao.imp.QuizChoiceJDBCDAO;
+import com.yby.demo.dao.imp.QuizQuestionHibernateDAO;
+import com.yby.demo.dao.imp.QuizQuestionJDBCDAO;
 import com.yby.demo.dao.imp.QuizTypeHibernateDAO;
 import com.yby.demo.dao.imp.QuizTypeJDBCDAO;
 import com.yby.demo.dao.imp.UserHibernateDAO;
@@ -47,6 +51,32 @@ public class DAOFactory {
 		
 		}	
 		
+	}
+	
+	public static QuizQuestionDAO createQuizQuestionDAO( String type) {
+		switch(type) {
+		case "JDBC":
+			return new QuizQuestionJDBCDAO();
+		case "Hibernate":
+			return new QuizQuestionHibernateDAO();
+		default:
+			return new QuizQuestionHibernateDAO();
+		
+		}	
+		
+	}
+	
+	public static QuizChoiceDAO createQuizChoiceDAO( String type) {
+		switch(type) {
+		case  "JDBC":
+			return new QuizChoiceJDBCDAO();
+		
+		
+		case "Hibernate":
+			return new QuizChoiceHibernateDAO();
+		default:
+			return new QuizChoiceHibernateDAO();
+		}
 	}
 	
 	

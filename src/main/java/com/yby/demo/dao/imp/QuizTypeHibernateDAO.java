@@ -48,7 +48,9 @@ public class QuizTypeHibernateDAO implements QuizTypeDAO{
 	
 //	public static void main(String[] args) throws SQLException {
 //		QuizTypeHibernateDAO dao = new QuizTypeHibernateDAO();
-//		System.out.println(dao.selectAll());
+//		List<QuizType> qtypes = dao.selectAll();
+//		System.out.println(qtypes.get(1).getQuiz_questions());
+//		
 //	}
 
 }

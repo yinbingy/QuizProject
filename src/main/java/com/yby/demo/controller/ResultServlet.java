@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mysql.cj.Session;
+import com.yby.demo.dao.DAOFactory;
 import com.yby.demo.dao.QuizChoiceDAO;
 import com.yby.demo.dao.ResultDAO;
 import com.yby.demo.domain.QuizChoice;
@@ -30,7 +31,7 @@ public class ResultServlet extends HttpServlet{
 	
 	@Override
 	public void init() {
-		quizChoiceDao = new QuizChoiceDAO();
+		quizChoiceDao = DAOFactory.createQuizChoiceDAO("Hibernate");
 		resultDao = new ResultDAO();
 	}
 //	
