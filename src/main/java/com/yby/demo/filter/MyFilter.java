@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.cj.Session;
 
-@WebFilter(filterName="MyFilter", urlPatterns= {"/home.jsp" })
+@WebFilter(filterName="MyFilter", urlPatterns= {"/HomeServlet", "/QuizServlet", "/FeedbackServlet", "/ResultServlet" })
 public class MyFilter implements Filter{
 
 	@Override
@@ -25,13 +25,14 @@ public class MyFilter implements Filter{
 		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpSession session = httpRequest.getSession(false);
-		
+		System.out.println("IN filter");
 		
 		if (session == null || session.getAttribute("sessionName") == null) {
 			
-			request.setAttribute("loginMsg", "Unauthorized access request");
+			request.setAttribute("loginMsg", "Unauthorized access");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		} else {
+			System.out.println(session.getAttribute("sessionName"));
 			chain.doFilter(request, response);
 		}          
 	}  

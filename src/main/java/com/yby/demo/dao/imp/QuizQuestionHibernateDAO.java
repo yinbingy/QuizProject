@@ -33,12 +33,12 @@ public class QuizQuestionHibernateDAO implements QuizQuestionDAO {
 			CriteriaQuery<QuizQuestion> criteriaQuery = cb.createQuery(QuizQuestion.class);
 			Root<QuizQuestion> root = criteriaQuery.from(QuizQuestion.class);
 			
-			criteriaQuery.select(root);
-			Predicate predicate = root.get("quiz_type_id").in(tpyeId);
+//			criteriaQuery.select(root);
+//			Predicate predicate = root.get("quiz_type_id").in(tpyeId);
+//			
+//			criteriaQuery.where(predicate);
 			
-			criteriaQuery.where(predicate);
-			
-			quizQuestionList = session.createQuery(criteriaQuery).getResultList();
+			quizQuestionList = session.createQuery("from QuizQuestion where quiz_type_id = :idVal order by rand()").setInteger("idVal", tpyeId).setMaxResults(5).getResultList();
 
 			transaction.commit();
 			
@@ -54,9 +54,9 @@ public class QuizQuestionHibernateDAO implements QuizQuestionDAO {
 		return quizQuestionList;
 	}
 	
-//	public static void main(String[] args) throws SQLException {
-//		QuizQuestionHibernateDAO dao = new QuizQuestionHibernateDAO();
-//		System.out.println(dao.getAllQuizQuestionByType(1).get(1).getQuiz_type().getType_name());
-//	}
+	public static void main(String[] args) throws SQLException {
+		QuizQuestionHibernateDAO dao = new QuizQuestionHibernateDAO();
+		System.out.println(dao.getAllQuizQuestionByType(1).get(1).getQuiz_type().getType_name());
+	}
 
 }

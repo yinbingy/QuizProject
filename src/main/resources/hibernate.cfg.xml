@@ -15,6 +15,7 @@
         <mapping class="com.yby.demo.domain.QuizType"/>
         <mapping class="com.yby.demo.domain.QuizQuestion"/>
         <mapping class="com.yby.demo.domain.QuizChoice"/>
+        <mapping class="com.yby.demo.domain.QuizResult"/>
         
     </session-factory>
 </hibernate-configuration>

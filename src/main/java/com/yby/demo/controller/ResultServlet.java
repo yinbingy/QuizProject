@@ -32,7 +32,7 @@ public class ResultServlet extends HttpServlet{
 	@Override
 	public void init() {
 		quizChoiceDao = DAOFactory.createQuizChoiceDAO("Hibernate");
-		resultDao = new ResultDAO();
+		resultDao = DAOFactory.createResultDAO("Hibernate");
 	}
 //	
 	

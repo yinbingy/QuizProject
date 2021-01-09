@@ -4,14 +4,5 @@
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
-  <filter>
-    <filter-name>MyFilter</filter-name>
-    <filter-class>
-  		com.yby.demo.filter.MyFilter
-  	</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>MyFilter</filter-name>
-    <url-pattern>/HomeServlet</url-pattern>
-  </filter-mapping>
+  
 </web-app>

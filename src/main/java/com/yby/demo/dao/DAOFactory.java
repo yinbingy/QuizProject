@@ -8,6 +8,8 @@ import com.yby.demo.dao.imp.QuizQuestionHibernateDAO;
 import com.yby.demo.dao.imp.QuizQuestionJDBCDAO;
 import com.yby.demo.dao.imp.QuizTypeHibernateDAO;
 import com.yby.demo.dao.imp.QuizTypeJDBCDAO;
+import com.yby.demo.dao.imp.ResultHibernateDAO;
+import com.yby.demo.dao.imp.ResultJDBCDAO;
 import com.yby.demo.dao.imp.UserHibernateDAO;
 import com.yby.demo.dao.imp.UserJDBCDAO;
 
@@ -76,6 +78,19 @@ public class DAOFactory {
 			return new QuizChoiceHibernateDAO();
 		default:
 			return new QuizChoiceHibernateDAO();
+		}
+	}
+	
+	public static ResultDAO createResultDAO (String type ) {
+		switch(type) {
+		case  "JDBC":
+			return new ResultJDBCDAO();
+		
+		
+		case "Hibernate":
+			return new ResultHibernateDAO();
+		default:
+			return new ResultHibernateDAO();
 		}
 	}
 	

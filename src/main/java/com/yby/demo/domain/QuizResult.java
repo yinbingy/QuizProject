@@ -2,13 +2,32 @@ package com.yby.demo.domain;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "result")
 public class QuizResult {
-	private Timestamp startTime;
-	private Timestamp endTime;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "RESULT_ID")
 	private int resultId;
+	
+	@Column(name = "USER_ID")
 	private int userId;
+	@Column(name = "TYPE_ID")
 	private int typeId;
+	@Column(name = "SCORE")
 	private int score;
+	@Column(name = "START_TIME")
+	private Timestamp startTime;
+	@Column(name = "END_TIME")
+	private Timestamp endTime;
 	
 	public Timestamp getStartTime() {
 		return startTime;
