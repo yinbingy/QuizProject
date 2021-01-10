@@ -17,8 +17,10 @@ import javax.servlet.http.HttpSession;
 import com.mysql.cj.Session;
 import com.yby.demo.dao.DAOFactory;
 import com.yby.demo.dao.QuizChoiceDAO;
+import com.yby.demo.dao.QuizDetailDAO;
 import com.yby.demo.dao.ResultDAO;
 import com.yby.demo.domain.QuizChoice;
+import com.yby.demo.domain.QuizDetail;
 import com.yby.demo.domain.QuizQuestion;
 import com.yby.demo.domain.QuizQuestionWithCorrect;
 import com.yby.demo.domain.QuizResult;
@@ -28,11 +30,13 @@ public class ResultServlet extends HttpServlet{
 	
 	private QuizChoiceDAO quizChoiceDao;
 	private ResultDAO resultDao;
+	private QuizDetailDAO detailDao;
 	
 	@Override
 	public void init() {
 		quizChoiceDao = DAOFactory.createQuizChoiceDAO("Hibernate");
 		resultDao = DAOFactory.createResultDAO("Hibernate");
+		detailDao  = DAOFactory.createQuizDetailtDAO("Hibernate");
 	}
 //	
 	
@@ -40,12 +44,6 @@ public class ResultServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
-		
-		
-		
-		
 		
 		Map<Integer, Integer> choiceIdUserMade = (Map<Integer, Integer>) request.getAttribute("choiceUserMade");
 		
@@ -113,13 +111,27 @@ public class ResultServlet extends HttpServlet{
 		qr.setStartTime((Timestamp)session.getAttribute("startTime"));
 		qr.setEndTime((Timestamp)session.getAttribute("endTime"));
 		
-		
+		// Add result into the database
 		try {
-			resultDao.addResult(qr);
+			int resultId = resultDao.addResult(qr);
+			
+			for(QuizQuestion qq : qqList) {
+				QuizDetail qd = new QuizDetail();
+				qd.setResultId(resultId);
+				qd.setQuestionId(qq.getQuiz_question_id());
+				if (choiceIdUserMade.containsKey(qq.getQuiz_question_id())) {
+					qd.setChoiceId(choiceIdUserMade.get(qq.getQuiz_question_id()));			
+				} else {
+					qd.setChoiceId(null);
+				}
+				detailDao.addQuizDetail(qd);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Add user's choice into the database.
 		
 		request.setAttribute("numOfQuestions", numOfQuestions);
 		request.setAttribute("correctNum", correctNum);

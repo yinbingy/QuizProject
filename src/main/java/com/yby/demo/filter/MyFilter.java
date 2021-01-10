@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.cj.Session;
 
-@WebFilter(filterName="MyFilter", urlPatterns= {"/HomeServlet", "/QuizServlet", "/FeedbackServlet", "/ResultServlet" })
+@WebFilter(filterName="MyFilter", urlPatterns= {"/HomeServlet", "/QuizServlet", "/FeedbackServlet", "/ResultServlet", "/AdmainServlet" })
 public class MyFilter implements Filter{
 
 	@Override

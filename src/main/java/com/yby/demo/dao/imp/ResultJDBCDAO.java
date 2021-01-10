@@ -3,13 +3,14 @@ package com.yby.demo.dao.imp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.yby.demo.dao.ResultDAO;
 import com.yby.demo.domain.QuizResult;
 import com.yby.demo.util.JDBCUtil;
 
 public class ResultJDBCDAO implements ResultDAO {
-	public boolean addResult(QuizResult quizResult) throws SQLException {
+	public int addResult(QuizResult quizResult) throws SQLException {
 		
 		
 		Connection conn = JDBCUtil.getConnection();
@@ -31,10 +32,22 @@ public class ResultJDBCDAO implements ResultDAO {
 		int i = ps.executeUpdate();
 		
 		if(i == 0) {
-			return false;
+			return 0;
 		} else {
-			return true;
+			return 1;
 		}
 	
 	}
+
+	@Override
+	public List<QuizResult> selectAllResult() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public List<QuizResult> selectAllResult() throws SQLException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

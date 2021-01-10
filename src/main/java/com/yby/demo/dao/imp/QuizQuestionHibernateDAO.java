@@ -53,10 +53,10 @@ public class QuizQuestionHibernateDAO implements QuizQuestionDAO {
 		
 		return quizQuestionList;
 	}
-	
-	public static void main(String[] args) throws SQLException {
-		QuizQuestionHibernateDAO dao = new QuizQuestionHibernateDAO();
-		System.out.println(dao.getAllQuizQuestionByType(1).get(1).getQuiz_type().getType_name());
-	}
+//	
+//	public static void main(String[] args) throws SQLException {
+//		QuizQuestionHibernateDAO dao = new QuizQuestionHibernateDAO();
+//		System.out.println(dao.getAllQuizQuestionByType(1).get(1).getQuiz_type().getType_name());
+//	}
 
 }

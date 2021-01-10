@@ -45,6 +45,10 @@
     <div class="col-sm">
     	<a  href="feedback.jsp">Feedback</a>
     </div>
+    
+    <div class="col-sm">
+    	<a  href="AdmainServlet">Admain</a>
+    </div>
   </div>
 </div>
 
