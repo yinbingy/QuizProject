@@ -17,5 +17,7 @@ public interface QuizChoiceDAO {
 	public QuizChoice getQuizChoiceByChoiceId(int choiceId) throws SQLException;
 	
 	public boolean getCorrectByChoiceId(int choiceId) throws SQLException;
+	
+	public int addChoice(QuizChoice choice) throws SQLException;
 
 }

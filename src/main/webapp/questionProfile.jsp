@@ -61,8 +61,14 @@
 
 
 
+
 <div class = "container mb-3 mt-3">
 	<table class = "table table-striped table-bordered" stype="width: 100%" id = myTable>
+	
+	
+		<c:if test="${sessionScope.typeid != null}">
+		  <a  href="AddQuestionServlet">Add</a>
+		</c:if>
 		<thead>
 			<th>
 				Content

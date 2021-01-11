@@ -16,6 +16,7 @@ import org.hibernate.query.Query;
 
 import com.yby.demo.dao.QuizQuestionDAO;
 import com.yby.demo.domain.QuizQuestion;
+import com.yby.demo.domain.QuizResult;
 import com.yby.demo.domain.QuizType;
 import com.yby.demo.domain.User;
 import com.yby.demo.util.HibernateConfigUtil;
@@ -135,6 +136,33 @@ public class QuizQuestionHibernateDAO implements QuizQuestionDAO {
 				}
 				
 				return true;
+	}
+
+	@Override
+	public int addQuestion(QuizQuestion q) throws SQLException {
+		
+		
+		
+		// TODO Auto-generated method stub
+				Session session = HibernateConfigUtil.openSession();
+				Transaction transaction = null;
+				
+				try {
+					transaction = session.beginTransaction();
+					QuizQuestion result = (QuizQuestion) session.merge(q);
+					transaction.commit();
+					
+					return result.getQuiz_question_id();
+				} catch(Exception e) {
+					if (transaction != null) {
+						transaction.rollback();
+					}
+					
+					e.printStackTrace();
+				} finally {
+					session.close();
+				}
+				return 0;
 	}
 	
 	

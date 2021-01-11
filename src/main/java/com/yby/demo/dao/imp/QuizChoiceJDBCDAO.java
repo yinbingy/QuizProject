@@ -81,4 +81,10 @@ public class QuizChoiceJDBCDAO implements QuizChoiceDAO{
 		
 	}
 
+	@Override
+	public int addChoice(QuizChoice choice) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

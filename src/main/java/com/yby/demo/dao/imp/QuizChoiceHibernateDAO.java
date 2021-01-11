@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 
 import com.yby.demo.dao.QuizChoiceDAO;
 import com.yby.demo.domain.QuizChoice;
+import com.yby.demo.domain.QuizResult;
 import com.yby.demo.util.HibernateConfigUtil;
 
 public class QuizChoiceHibernateDAO implements QuizChoiceDAO{
@@ -129,29 +130,29 @@ public class QuizChoiceHibernateDAO implements QuizChoiceDAO{
 		
 	}
 	
-	public static void main (String [] args) {
-		QuizChoiceHibernateDAO dao = new QuizChoiceHibernateDAO();
-		
-		try {
-			System.out.println(dao.getAllQuizChoiceByQuestionId(1));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			System.out.println(dao.getQuizChoiceByChoiceId(13).getQuizQuestion().getContent());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			System.out.println(dao.getCorrectByChoiceId(3));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	@Override
+	public int addChoice(QuizChoice choice) throws SQLException {
+		// TODO Auto-generated method stub
+				Session session = HibernateConfigUtil.openSession();
+				Transaction transaction = null;
+				
+				try {
+					transaction = session.beginTransaction();
+					QuizChoice result = (QuizChoice) session.merge(choice);
+					transaction.commit();
+					
+					return result.getChoice_id();
+				} catch(Exception e) {
+					if (transaction != null) {
+						transaction.rollback();
+					}
+					
+					e.printStackTrace();
+				} finally {
+					session.close();
+				}
+				return 0;
 	}
 
 }

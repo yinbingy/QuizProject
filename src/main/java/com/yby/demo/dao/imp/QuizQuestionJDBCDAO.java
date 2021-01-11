@@ -69,4 +69,11 @@ public class QuizQuestionJDBCDAO implements QuizQuestionDAO{
 		return false;
 	}
 
+
+	@Override
+	public int addQuestion(QuizQuestion q) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

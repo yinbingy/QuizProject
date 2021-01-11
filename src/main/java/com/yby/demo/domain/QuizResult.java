@@ -31,8 +31,15 @@ public class QuizResult {
 	private Timestamp startTime;
 	@Column(name = "END_TIME")
 	private Timestamp endTime;
+	@Column(name = "NUM_OF_QUESTION")
+	private int numQuestions;
 	
-	
+	public int getNumQuestions() {
+		return numQuestions;
+	}
+	public void setNumQuestions(int numQuestions) {
+		this.numQuestions = numQuestions;
+	}
 	@ManyToOne(fetch = FetchType.EAGER )
 	@JoinColumn(name = "USER_ID", nullable = false, insertable = false,updatable = false)
 	private User user;

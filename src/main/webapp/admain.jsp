@@ -69,7 +69,7 @@
 						${result.user.user_name}
 					</td>
 					<td>
-						10
+						${result.numQuestions}
 					</td>
 					<td>
 						${result.score}

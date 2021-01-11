@@ -107,7 +107,8 @@ public class ResultServlet extends HttpServlet{
 		qr.setUserId((int) session.getAttribute("UserId"));
 		qr.setTypeId((int) session.getAttribute("typeId"));
 		
-		qr.setScore((int) (avg*10));
+		qr.setScore((int) (correctNum));
+		qr.setNumQuestions(numOfQuestions);
 		qr.setStartTime((Timestamp)session.getAttribute("startTime"));
 		qr.setEndTime((Timestamp)session.getAttribute("endTime"));
 		

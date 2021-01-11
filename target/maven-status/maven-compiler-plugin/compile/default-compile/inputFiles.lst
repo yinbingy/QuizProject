@@ -4,6 +4,7 @@ C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp\QuizDetailHibernateDAO.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\controller\LogoutServlet.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp\QuizChoiceHibernateDAO.java
+C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\controller\UserProfileServlet.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\DAOFactory.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp\UserJDBCDAO.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\UserDAO.java
@@ -25,8 +26,10 @@ C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\domain\Feedback.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\util\HibernateConfigUtil.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp\UserHibernateDAO.java
+C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\controller\QuestionProfileServlet.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp\QuizTypeJDBCDAO.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\domain\QuizDetail.java
+C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\controller\AddQuestionServlet.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\controller\DetailServlet.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp\FeedBackJDBCDAO.java
 C:\Users\Xu Han\eclipse-workspace\QuizProject\src\main\java\com\yby\demo\dao\imp\FeedBackHibernateDAO.java

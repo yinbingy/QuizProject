@@ -41,10 +41,14 @@ public class QuestionProfileServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+		
+		
 		HttpSession session = request.getSession(false);
 		
 		session.setAttribute("typeList", typeList);
 		request.getRequestDispatcher("/questionProfile.jsp").forward(request, response);
+		
+		
 		
 	}
 	
@@ -86,7 +90,7 @@ public class QuestionProfileServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		} 
 		
 		
 		HttpSession session = request.getSession(false);
