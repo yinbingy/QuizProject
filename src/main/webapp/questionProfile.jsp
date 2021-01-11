@@ -82,24 +82,29 @@
 			
 			<c:forEach items = "${requestScope.questionList}"  var  = "question">
 				<tr>
+				
+				<form action="QuestionProfileServlet" method="post">
 					<td>
-						${question.content}
+						
+						<input class = "form-control" type="text" name="content" value = "${question.content}" />
 					</td>
 						
 					<td>
 						${question.status}
 					</td>
 					<td>
-						<form action="QuestionProfileServlet" method="post">
+						
 							<button type="submit" name="disable" value="${question.quiz_question_id}">Disable</button>
 							<button type="submit" name="enable" value="${question.quiz_question_id}">Enable</button>
 							<button type="submit" name="update" value="${question.quiz_question_id}">Update</button>
 							
 							
-						</form>
+						
 					
 						
 					</td>
+					
+				</form>
 				</tr>
 			
 			</c:forEach>

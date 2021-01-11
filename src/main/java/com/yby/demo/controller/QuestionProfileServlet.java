@@ -77,6 +77,15 @@ public class QuestionProfileServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (request.getParameter("update") != null) {
+			String s = request.getParameter("content");
+			int id = Integer.parseInt(request.getParameter("update"));
+			try {
+				qqDao.updateContent(id, s);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		

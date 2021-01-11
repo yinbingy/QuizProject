@@ -19,4 +19,6 @@ public interface QuizQuestionDAO {
 
 	
 	public boolean updateStatus(int id, Boolean b) throws SQLException;
+	
+	public boolean updateContent(int id, String content) throws SQLException;
 }

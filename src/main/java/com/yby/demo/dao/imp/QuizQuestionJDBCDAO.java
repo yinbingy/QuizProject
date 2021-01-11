@@ -62,4 +62,11 @@ public class QuizQuestionJDBCDAO implements QuizQuestionDAO{
 		return null;
 	}
 
+
+	@Override
+	public boolean updateContent(int id, String content) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
