@@ -53,6 +53,12 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else {
 			
+			if (user.getStatus() == false) {
+				System.out.println("Disable");
+				request.setAttribute("loginMsg", "Your account has been disabled");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+			
 			
 			HttpSession oldSession = request.getSession(false);
 			if (oldSession != null) {

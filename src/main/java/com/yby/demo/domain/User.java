@@ -11,6 +11,11 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 	
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", user_name=" + user_name + ", pwd=" + pwd + ", status=" + status + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
@@ -22,8 +27,18 @@ public class User {
 	@Column(name = "PWD")
 	private String pwd;
 	
+	@Column(name = "STATUS")
+	private Boolean status;
 	
 	
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
 	public Integer getUser_id() {
 		return user_id;
 	}

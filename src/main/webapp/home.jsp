@@ -49,6 +49,9 @@
     <div class="col-sm">
     	<a  href="AdmainServlet">Admain</a>
     </div>
+    
+   
+    
   </div>
 </div>
 
@@ -58,7 +61,7 @@
 
 <h>HOME</h>
 	
-
+	<div class = "row">
 	<c:forEach items="${requestScope.quizTypeList}" var="quizTypeList" >
 	
 			
@@ -73,7 +76,7 @@
 	 
   	 
   	</c:forEach>
-	
+	</div>
   	
 
 

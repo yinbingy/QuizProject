@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.yby.demo.dao.UserDAO;
 import com.yby.demo.domain.User;
@@ -98,6 +99,22 @@ public User getUserByName(String name) throws SQLException {
 		return u;
 		
 		
+	}
+
+
+	@Override
+	public List<User> selectAllUsers() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public boolean updateStatus(int id, Boolean b) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 
 import com.yby.demo.dao.UserDAO;
 import com.yby.demo.domain.Feedback;
+import com.yby.demo.domain.QuizType;
 import com.yby.demo.domain.User;
 import com.yby.demo.util.HibernateConfigUtil;
 
@@ -122,5 +123,70 @@ public class UserHibernateDAO implements UserDAO{
 	
 		return null;
 	}
+
+	@Override
+	public List<User> selectAllUsers() throws SQLException {
+		Session session = HibernateConfigUtil.openSession();
+		Transaction transaction = null;
+		List<User> allUser = null;
+		try {
+			transaction = session.beginTransaction();
+			//CriteriaBuilder cb = session.getCriteriaBuilder();
+			Query query = session.createQuery("from User");
+			allUser = query.list();
+			
+			
+			transaction.commit();
+			
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return allUser;
+	}
+	
+
+
+	@Override
+	public boolean updateStatus(int id, Boolean b) throws SQLException {
+		Session session = HibernateConfigUtil.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			
+			User user = session.get(User.class, id);
+			
+			user.setStatus(b);
+			
+
+			session.merge(user);
+			transaction.commit();
+			
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+			return false;
+		} finally {
+			session.close();
+		}
+		
+		return true;
+		
+	}
+	
+	
+//	public static void main(String[] args) throws SQLException {
+//		UserHibernateDAO dao = new UserHibernateDAO();
+//		dao.updateStatus(1, false);
+//	}
+
+	
 
 }

@@ -32,13 +32,9 @@ public class QuizQuestionHibernateDAO implements QuizQuestionDAO {
 			CriteriaBuilder cb = session.getCriteriaBuilder();
 			CriteriaQuery<QuizQuestion> criteriaQuery = cb.createQuery(QuizQuestion.class);
 			Root<QuizQuestion> root = criteriaQuery.from(QuizQuestion.class);
-			
-//			criteriaQuery.select(root);
-//			Predicate predicate = root.get("quiz_type_id").in(tpyeId);
-//			
-//			criteriaQuery.where(predicate);
-			
-			quizQuestionList = session.createQuery("from QuizQuestion where quiz_type_id = :idVal order by rand()").setInteger("idVal", tpyeId).setMaxResults(5).getResultList();
+
+		
+			quizQuestionList = session.createQuery("from QuizQuestion where quiz_type_id = :idVal and status = 1 order by rand()").setInteger("idVal", tpyeId).setMaxResults(10).getResultList();
 
 			transaction.commit();
 			

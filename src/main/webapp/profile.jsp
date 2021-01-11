@@ -18,60 +18,46 @@
 	<div class="col-sm">
      <a href="HomeServlet">Home <span class="sr-only">Home</span></a>
     </div>
-    
-    
-     <div class="col-sm">
-    	<a  href="UserProfileServlet">UserProfile</a>
+    <div class="col-sm">
+     <a class="nav-item nav-link" href="AdmainServlet">Back</a>
     </div>
+    
 </div>
 
 <div class = "container mb-3 mt-3">
 	<table class = "table table-striped table-bordered" stype="width: 100%" id = myTable>
 		<thead>
 			<th>
-				Taken_Date
+				Name
 			</th>
 			
 			<th>
-				QuizType
+				Enabled
 			</th>
+			
 			<th>
-				Name
-			</th>
-			<th>
-				Number of Questions
-			</th>
-			<th>
-				Score
-			</th>
-			<th>
-				Detail
+				Operation
 			</th>
 		</thead>
 		
 			
 		<tbody>
 			
-			<c:forEach items = "${requestScope.resultList}"  var  = "result">
+			<c:forEach items = "${requestScope.userList}"  var  = "user">
 				<tr>
 					<td>
-						${result.startTime}
+						${user.user_name}
 					</td>
 					<td>
-						${result.type.type_name}
+						${user.status}
 					</td>
 					<td>
-						${result.user.user_name}
-					</td>
-					<td>
-						10
-					</td>
-					<td>
-						${result.score}
-					</td>
-					<td>
+					
+					<form action="UserProfileServlet" method="post">
+						<button type="submit" name="enable" value="${user.user_id}">Enable</button>
+						<button type="submit" name="disable" value="${user.user_id}">Disable</button>
+					</form>
 						
-						<a  href="DetailServlet?resultId=${result.resultId} ">Detail</a>
 					</td>
 				</tr>
 			

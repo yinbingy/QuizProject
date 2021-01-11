@@ -16,35 +16,37 @@
 <body>
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<h3> This is your result for <%=session.getAttribute("quizType") %> </h3>
-<h1><%= session.getAttribute("sessionName") %> Your score is <%= request.getAttribute("correctNum") %> / <%= request.getAttribute("numOfQuestions") %></h1>
-<h2> <%= request.getAttribute("pass") %> </h2>
-
-<h3> start at <%= session.getAttribute("startTime") %> </h3>
-<h3> end at <%= session.getAttribute("endTime") %></h3>
-
-<c:forEach items="${requestScope.qqwcList}" var="qqwcList" >
+<c:forEach items="${requestScope.qdList}" var="qd" >
 	
 			
 	 <div class="card" style="width: 18rem;">
 	  <div class="card-body">
-	    <h5 class="card-title"><c:out value = "${qqwcList.qContent}"></c:out></h5>
+	    <h5 class="card-title"><c:out value = "${qd.quizQuestion.content}"></c:out></h5>
 	    <p>Your answer is: </p>
 	    
 	    
-	     <h5 class="card-title"><c:out value = "${qqwcList.cContent}"></c:out></h5>
-	     <p> which is: </p>
-	      <h5 class="card-title"><c:out value = "${qqwcList.ifCorrect}"></c:out></h5>
+	    	<c:choose>
+							<c:when test="${qd.choice == null}">
+								<h5 class="card-title"><c:out value = "N/A"></c:out></h5>
+	    						 <p> which is: </p>
+	      						<h5 class="card-title"><c:out value = "false"></c:out></h5>
+							</c:when>
+								
+							<c:otherwise>
+			
+								<h5 class="card-title"><c:out value = "${qd.choice.content}"></c:out></h5>
+	    						 <p> which is: </p>
+	      						<h5 class="card-title"><c:out value = "${qd.choice.if_correct}"></c:out></h5>
+							</c:otherwise>
+			</c:choose >
+	    
+	     
 	    
 	  </div>
 	  </div>
 	 
 </c:forEach>
 
-
- <a class="nav-item nav-link" href="ResultServlet">Home</a>
-
-
-
+ <a class="nav-item nav-link" href="AdmainServlet">Back</a>
 </body>
 </html>

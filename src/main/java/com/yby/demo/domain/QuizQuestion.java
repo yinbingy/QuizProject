@@ -29,17 +29,21 @@ public class QuizQuestion {
 	private QuizType quiz_type;
 	
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "quizQuestion")
-	private Set<QuizChoice> quizChoice = new HashSet<QuizChoice> (0);
+//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "quizQuestion")
+//	private Set<QuizChoice> quizChoice = new HashSet<QuizChoice> (0);
 	
 	
-	public Set<QuizChoice> getQuizChoice() {
-		return quizChoice;
-	}
-	public void setQuizChoice(Set<QuizChoice> quizChoice) {
-		this.quizChoice = quizChoice;
-	}
+//	public Set<QuizChoice> getQuizChoice() {
+//		return quizChoice;
+//	}
+//	public void setQuizChoice(Set<QuizChoice> quizChoice) {
+//		this.quizChoice = quizChoice;
+//	}
 
+
+	@Column(name = "STATUS")
+	private Boolean status;
+	
 
 	@Column(name = "QUIZ_TYPE_ID")
 	private int quiz_type_id;
