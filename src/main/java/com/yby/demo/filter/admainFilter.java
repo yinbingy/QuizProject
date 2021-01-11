@@ -11,10 +11,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.Session;
-
-@WebFilter(filterName="MyFilter", urlPatterns= {"/HomeServlet", "/QuizServlet", "/FeedbackServlet", "/ResultServlet", "/AdmainServlet", "/DetailServlet","/QuestionProfileServlet" , "/AddQuestionServlet", "/UserProfileServlet"})
-public class MyFilter implements Filter{
+@WebFilter(filterName="admainFilter", urlPatterns= { "/AdmainServlet", "/DetailServlet","/QuestionProfileServlet" , "/AddQuestionServlet", "/UserProfileServlet"})
+public class admainFilter implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest request, 
@@ -32,7 +30,12 @@ public class MyFilter implements Filter{
 			request.setAttribute("loginMsg", "Unauthorized access");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		} else {
-			System.out.println(session.getAttribute("sessionName"));
+			
+			if(!session.getAttribute("sessionName").equals("ben")) {
+				request.setAttribute("homeMsg", "No access to Admain");
+				request.getRequestDispatcher("HomeServlet").forward(request, response);
+			}
+
 			chain.doFilter(request, response);
 		}          
 	}  

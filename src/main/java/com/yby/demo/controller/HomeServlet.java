@@ -37,7 +37,12 @@ public class HomeServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 	
-	
+		if(request.getAttribute("homeMsg") != null) {
+			String homeMsg = (String) request.getAttribute("homeMsg");
+			request.setAttribute("homeMsg", homeMsg);
+		}
+		
+		
 		
 		request.setAttribute("quizTypeList", quizTypeList);
 		request.getRequestDispatcher("home.jsp").forward(request, response);
@@ -57,7 +62,10 @@ public class HomeServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 	
-	
+		if(request.getAttribute("homeMsg") != null) {
+			String homeMsg = (String) request.getAttribute("homeMsg");
+			request.setAttribute("homeMsg", homeMsg);
+		}
 		
 		request.setAttribute("quizTypeList", quizTypeList);
 		request.getRequestDispatcher("home.jsp").forward(request, response);

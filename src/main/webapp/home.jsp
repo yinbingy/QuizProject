@@ -55,11 +55,17 @@
   </div>
 </div>
 
+<h>
+<% 
+			String name = (String) request.getAttribute("homeMsg");
+		
+			
+			if(name != null) {
+				out.print(name);
+			}
+			
+%></h>
   
-   
-
-
-<h>HOME</h>
 	
 	<div class = "row">
 	<c:forEach items="${requestScope.quizTypeList}" var="quizTypeList" >
