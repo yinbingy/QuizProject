@@ -48,4 +48,18 @@ public class QuizQuestionJDBCDAO implements QuizQuestionDAO{
 		
 	}
 
+
+	@Override
+	public boolean updateStatus(int id, Boolean b) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public List<QuizQuestion> getAllQuizQuestionByTypeWithDisabled(int tpyeId) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

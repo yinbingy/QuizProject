@@ -15,4 +15,8 @@ public interface QuizQuestionDAO {
 	
 	public List<QuizQuestion> getAllQuizQuestionByType(int tpyeId) throws SQLException;
 
+	public List<QuizQuestion> getAllQuizQuestionByTypeWithDisabled(int tpyeId) throws SQLException;
+
+	
+	public boolean updateStatus(int id, Boolean b) throws SQLException;
 }

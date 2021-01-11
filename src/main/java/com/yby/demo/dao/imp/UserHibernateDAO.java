@@ -35,6 +35,7 @@ public class UserHibernateDAO implements UserDAO{
 			User e2 = new User();
 			e2.setUser_name(name);
 			e2.setPwd(pwd);
+			e2.setStatus(true);
 			
 			User e1 = (User) session.merge(e2);
 			System.out.println(e1);

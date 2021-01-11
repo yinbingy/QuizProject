@@ -27,18 +27,6 @@ public class QuizQuestion {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "QUIZ_TYPE_ID", nullable = false, insertable = false,updatable = false)
 	private QuizType quiz_type;
-	
-	
-//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "quizQuestion")
-//	private Set<QuizChoice> quizChoice = new HashSet<QuizChoice> (0);
-	
-	
-//	public Set<QuizChoice> getQuizChoice() {
-//		return quizChoice;
-//	}
-//	public void setQuizChoice(Set<QuizChoice> quizChoice) {
-//		this.quizChoice = quizChoice;
-//	}
 
 
 	@Column(name = "STATUS")
@@ -61,6 +49,12 @@ public class QuizQuestion {
 	private String content;
 	
 	
+	public Boolean getStatus() {
+		return status;
+	}
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 	public int getQuiz_question_id() {
 		return quiz_question_id;
 	}

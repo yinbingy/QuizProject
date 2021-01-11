@@ -18,65 +18,87 @@
 	<div class="col-sm">
      <a href="HomeServlet">Home <span class="sr-only">Home</span></a>
     </div>
-    
-    
-     <div class="col-sm">
-    	<a  href="UserProfileServlet">UserProfile</a>
-    </div>
-    
     <div class="col-sm">
-    	<a  href=" QuestionProfileServlet">QuestionProfile</a>
+     <a class="nav-item nav-link" href="AdmainServlet">Back</a>
     </div>
-   
+    
 </div>
 
 <div class = "container mb-3 mt-3">
 	<table class = "table table-striped table-bordered" stype="width: 100%" id = myTable>
 		<thead>
 			<th>
-				Taken_Date
-			</th>
-			
-			<th>
-				QuizType
-			</th>
-			<th>
 				Name
 			</th>
 			<th>
-				Number of Questions
-			</th>
-			<th>
-				Score
-			</th>
-			<th>
-				Detail
+				Questions
 			</th>
 		</thead>
 		
 			
 		<tbody>
 			
-			<c:forEach items = "${requestScope.resultList}"  var  = "result">
+			<c:forEach items = "${sessionScope.typeList}"  var  = "type">
 				<tr>
 					<td>
-						${result.startTime}
+						${type.type_name}
 					</td>
 					<td>
-						${result.type.type_name}
-					</td>
-					<td>
-						${result.user.user_name}
-					</td>
-					<td>
-						10
-					</td>
-					<td>
-						${result.score}
-					</td>
-					<td>
+					
+					<form action="QuestionProfileServlet" method="post">
+						<button type="submit" name="show" value="${type.type_id}">Show Questions</button>
+					</form>
 						
-						<a  href="DetailServlet?resultId=${result.resultId} ">Detail</a>
+					</td>
+				</tr>
+			
+			</c:forEach>
+		
+		</tbody>
+		
+	</table>
+</div>
+
+
+
+<div class = "container mb-3 mt-3">
+	<table class = "table table-striped table-bordered" stype="width: 100%" id = myTable>
+		<thead>
+			<th>
+				Content
+			</th>
+			
+			<th>
+				Status
+			</th>
+			
+			<th>
+				Operations
+			</th>
+		</thead>
+		
+			
+		<tbody>
+			
+			<c:forEach items = "${requestScope.questionList}"  var  = "question">
+				<tr>
+					<td>
+						${question.content}
+					</td>
+						
+					<td>
+						${question.status}
+					</td>
+					<td>
+						<form action="QuestionProfileServlet" method="post">
+							<button type="submit" name="disable" value="${question.quiz_question_id}">Disable</button>
+							<button type="submit" name="enable" value="${question.quiz_question_id}">Enable</button>
+							<button type="submit" name="update" value="${question.quiz_question_id}">Update</button>
+							
+							
+						</form>
+					
+						
 					</td>
 				</tr>
 			

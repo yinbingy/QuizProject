@@ -17,6 +17,7 @@ import org.hibernate.query.Query;
 import com.yby.demo.dao.QuizQuestionDAO;
 import com.yby.demo.domain.QuizQuestion;
 import com.yby.demo.domain.QuizType;
+import com.yby.demo.domain.User;
 import com.yby.demo.util.HibernateConfigUtil;
 
 public class QuizQuestionHibernateDAO implements QuizQuestionDAO {
@@ -49,10 +50,65 @@ public class QuizQuestionHibernateDAO implements QuizQuestionDAO {
 		
 		return quizQuestionList;
 	}
-//	
-//	public static void main(String[] args) throws SQLException {
-//		QuizQuestionHibernateDAO dao = new QuizQuestionHibernateDAO();
-//		System.out.println(dao.getAllQuizQuestionByType(1).get(1).getQuiz_type().getType_name());
-//	}
+
+	@Override
+	public boolean updateStatus(int id, Boolean b) throws SQLException {
+		// TODO Auto-generated method stub
+		Session session = HibernateConfigUtil.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			
+			QuizQuestion question = session.get(QuizQuestion.class, id);
+			
+			question.setStatus(b);
+			
+
+			session.merge(question);
+			transaction.commit();
+			
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+			return false;
+		} finally {
+			session.close();
+		}
+		
+		return true;
+	}
+
+	@Override
+	public List<QuizQuestion> getAllQuizQuestionByTypeWithDisabled(int tpyeId) throws SQLException {
+		Session session = HibernateConfigUtil.openSession();
+		Transaction transaction = null;
+		List<QuizQuestion> quizQuestionList = null;
+		try {
+			transaction = session.beginTransaction();
+			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaQuery<QuizQuestion> criteriaQuery = cb.createQuery(QuizQuestion.class);
+			Root<QuizQuestion> root = criteriaQuery.from(QuizQuestion.class);
+
+		
+			quizQuestionList = session.createQuery("from QuizQuestion where quiz_type_id = :idVal").setInteger("idVal", tpyeId).getResultList();
+
+			transaction.commit();
+			
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return quizQuestionList;
+	}
+	
+	
+
 
 }
